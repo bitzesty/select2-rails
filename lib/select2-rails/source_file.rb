@@ -5,7 +5,7 @@ class SourceFile < Thor
 
   desc "fetch source files", "fetch source files from GitHub"
   def fetch
-    self.destination_root = "vendor/assets"
+    self.destination_root = "app/assets"
     remote = "https://github.com/ivaynberg/select2"
     get "#{remote}/raw/master/select2.png", "images/select2.png"
     get "#{remote}/raw/master/spinner.gif", "images/spinner.gif"
@@ -15,7 +15,7 @@ class SourceFile < Thor
 
   desc "convert css to sass file", "convert css to sass file by sass-convert"
   def convert
-    self.destination_root = "vendor/assets"
+    self.destination_root = "app/assets"
     inside destination_root do
       run("sass-convert -F css -T sass stylesheets/select2.css stylesheets/select2.css.sass")
       gsub_file 'stylesheets/select2.css.sass', '(spinner.gif)', "('spinner.gif')"      
@@ -26,7 +26,7 @@ class SourceFile < Thor
 
   desc "clean up useless files", "clean up useless files"
   def cleanup
-    self.destination_root = "vendor/assets"
+    self.destination_root = "app/assets"
     remove_file "stylesheets/select2.css"
   end
 
